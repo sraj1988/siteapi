@@ -6,3 +6,4 @@ configure: system.site_information_settings
 dependencies:
   - rest
   - serialization
+

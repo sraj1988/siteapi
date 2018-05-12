@@ -26,12 +26,12 @@ class PageRestResource extends ResourceBase {
    * @param int $node_id
    *   Node id of page.
    * @return \Drupal\rest\ModifiedResourceResponse
-   *   Return modified respurce when endpoint is accessed.
+   *   Return modified resource when endpoint is accessed.
    */
   public function get($siteapikey, $node_id) {
     if (\Drupal::config('system.site')->get('siteapikey') != $siteapikey) {
       return new ModifiedResourceResponse('access denied', 401);
-    }    
+    }
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
     if(empty($node) || $node->getType() != 'page') {
       return new ModifiedResourceResponse('access denied', 401);

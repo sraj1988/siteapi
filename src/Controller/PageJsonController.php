@@ -14,7 +14,7 @@ class PageJsonController extends ControllerBase {
   
   /**
    * $serializer
-   * 
+   *
    * @var Symfony\Component\Serializer\Serializer
    */
   protected $serializer;
@@ -22,8 +22,8 @@ class PageJsonController extends ControllerBase {
   /**
    * Constructs a new PageJsonController.
    *
-   * @param Symfony\Component\Serializer\Serializer $contentEntityNormalizer
-   *   The content entity normalizer service.
+   * @param Symfony\Component\Serializer\Serializer $serializer
+   *   The serializer service.
    */
   public function __construct(Serializer $serializer) {
     $this->serializer = $serializer;
@@ -40,7 +40,7 @@ class PageJsonController extends ControllerBase {
   
   /**
    * Returns JSON representation for page content type
-   * 
+   *
    * @param string $siteapikey
    *   Site API key to access the endpoint.
    * @param int $node_id
@@ -52,14 +52,12 @@ class PageJsonController extends ControllerBase {
     if (\Drupal::config('system.site')->get('siteapikey') != $siteapikey) {
       return new JsonResponse('accesss denied', 401);
     }
-    
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
     if(empty($node) || $node->getType() != 'page') {
       return new JsonResponse('accesss denied', 401);
     }
-    
     $return =  $this->serializer->normalize($node);
-    return new JsonResponse($return);    
+    return new JsonResponse($return);
   }
   
 }
