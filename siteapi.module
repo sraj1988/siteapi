@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Provided form text element Site API key to the Site Information Form
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 
 /**
